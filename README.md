@@ -1,6 +1,40 @@
 # irsl_robot_hardware_dynamixel
 
 ## build
+
+```
+sudo apt install python-vcstool
+mkdir -p <your_work_space>/src
+source /opt/ros/<distro>/setup.bash
+cd <your_work_space>
+wget https://raw.githubusercontent.com/IRSL-tut/irsl_ros_control_shm/refs/heads/release-candidate/test/install.vcs
+(cd /src; vcs import --recursive < ../intall.vcs)
+catkin init
+catkin config --install
+catkin build irsl_dynamixel_hardware_shm irsl_ros_control_shm
+```
+
+## Execute
+
+### example
+
+- run hardware
+
+```
+source <your_work_space>/install/setup.bash
+dynamixel_hardware_shm --hash 8888 --shm_key 8888 --config <path_to>/config.yaml
+```
+
+- run control
+
+```
+source <your_work_space>/install/setup.bash
+cd <your_work_space>/src/irsl_ros_control_shm/test
+roslaunch ./ros_control_dynamixel.launch hash:=8888 shm_key:=8888
+```
+
+# Old
+
 ### Prepare related librarys
 ```
 cd /
