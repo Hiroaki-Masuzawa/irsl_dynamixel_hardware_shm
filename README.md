@@ -1,4 +1,4 @@
-# irsl_robot_hardware_dynamixel
+# irsl_dynamixel_hardware_shm
 
 ## build
 
@@ -30,65 +30,7 @@ dynamixel_hardware_shm --hash 8888 --shm_key 8888 --config <path_to>/config.yaml
 ```
 source <your_work_space>/install/setup.bash
 cd <your_work_space>/src/irsl_ros_control_shm/test
-roslaunch ./ros_control_dynamixel.launch hash:=8888 shm_key:=8888
-```
-
-# Old
-
-### Prepare related librarys
-```
-cd /
-git clone https://github.com/IRSL-tut/irsl_shm_controller_library -b release-candidate
-
-cd /irsl_shm_controller_library/irsl_shm_libs
-mkdir -p build
-cd build
-cmake .. && make -j `nproc` && make install
-
-cd /irsl_shm_controller_library/irsl_common_utils
-mkdir -p build
-cd build
-cmake .. && make -j `nproc` && make install
-
-cd /irsl_shm_controller_library/irsl_realtime_utils
-mkdir -p build
-cd build
-cmake .. && make -j `nproc` && make install
-
-ldconfig
-
-```
-
-```
-cd <ros_workspace>/src
-git clone https://github.com/ROBOTIS-GIT/dynamixel-workbench.git -b noetic
-git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git -b noetic
-cd ..
-catkin build dynamixel_sdk dynamixel_workbench_toolbox
-```
-
-<!-- 
-shm側を入れる
-cd <ros_workspace>/src
-
--->
-
-### clone and build
-```
-cd <source dir>
-git clone https://github.com/xxx/irsl_robot_hardware_dynamixel.git
-cd irsl_robot_hardware_dynamixel
-mkdir build
-cd build
-cmake ..
-make 
-```
-
-## Execute 
-### example
-```
-cd <source dir>/irsl_robot_hardware_dynamixel/build
-./robot_control 8888 88888 config.yaml
+roslaunch ros_control_shm.launch hash:=8888 shm_key:=8888 control_config:=ros_control.yaml robot_name:=dynamixel
 ```
 
 ### Command line Option

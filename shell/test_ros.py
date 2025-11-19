@@ -5,7 +5,7 @@ from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 def main():
     rospy.init_node('trajectory_publisher_py')
     pub = rospy.Publisher(
-        '/dyamixel/trajectory_controller/command',
+        '/dynamixel/trajectory_controller/command',
         JointTrajectory,
         queue_size=10
     )
