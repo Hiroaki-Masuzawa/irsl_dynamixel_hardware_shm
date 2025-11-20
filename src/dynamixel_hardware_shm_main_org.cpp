@@ -26,19 +26,28 @@ static const std::unordered_map<std::string, int> jointTypeMap = {
 typedef std::vector<isc::irsl_float_type> floatvec;
 typedef std::vector<int32_t>              int32vec;
 
+#include <stdlib.h>
 class OptParse : public CLI::App
 {
 private:
     uint64_t _hash;
     uint32_t _key;
 public:
-    OptParse(const std::string name) : CLI::App(name)
+    OptParse(const std::string &name) : CLI::App(name)
     {
         add_option("--hash", _hash, "")->default_val("8888");
         add_option("--shm_key", _key, "")->default_val("8888");
     }
     uint64_t getHash() { return _hash; }
     uint32_t getShmKey() { return _key; }
+    void opt_parse(int argc, char **argv)
+    {
+        try {
+            this->parse(argc, argv);
+        } catch(const CLI::ParseError &e) {
+            ::exit( this->exit(e) );
+        }
+    }
 };
 ////
 
@@ -75,7 +84,8 @@ int main(int argc, char **argv)
     OptParse op("Dynamixel controller");
     op.add_option("--config", fname, "name of input file(.yaml)")->default_val("config.yaml");
     op.add_flag("-v,--verbose", verbose, "verbose message");
-    op.parse(argc, argv);
+    op.opt_parse(argc, argv);
+
 
     YAML::Node n;
     try
@@ -88,9 +98,9 @@ int main(int argc, char **argv)
         std::cerr << "parameter file [" << fname << "] can not open" << std::endl;
         return false;
     }
-    YAML::Node hardware_settings = n[hardware_settings_name];
+    YAML::Node hardware_settings = n[_DX_HW_CONFIG_];
 
-    DynamixelInterface di;
+    irsl_dynamixel::DynamixelInterface di;
     bool ret;
     ret = di.initialize(hardware_settings);
     if (!ret)
