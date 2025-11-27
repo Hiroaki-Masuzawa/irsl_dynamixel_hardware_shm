@@ -39,17 +39,4 @@ roslaunch ros_control_shm.launch hash:=8888 shm_key:=8888 control_config:=ros_co
 | `shm_hash`      | String<br>Example: `1234`                            | Specifies the shared memory hash value.                           | `"8888"`                          |
 | `shm_key`       | String<br>Example: `5678`                            | Specifies the shared memory key.                                  | `"8888"`                          |
 | `config_file`   | String<br>Example: `config.yaml`                     | Specifies the name of the input configuration file (YAML format). | `"config.yaml"`                   |
-| `--joint_type`  | String<br>Example: `"PositionGains,PositionCommand"` | Specifies the joint types (comma-separated list).                 | `"PositionGains,PositionCommand"` |
 | `-v, --verbose` | Flag                                                 | Enables verbose output.                                           | *(Default: Off)*                  |
-
-#### Valid Values for `--joint_type`
-| Joint Type Name    |
-| ------------------ |
-| `PositionCommand`  |
-| `PositionGains`    |
-| `VelocityCommand`  |
-| `VelocityGains`    |
-| `TorqueCommand`    |
-| `TorqueGains`      |
-| `MotorTemperature` |
-| `MotorCurrent`     |
