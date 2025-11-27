@@ -7,7 +7,7 @@ sudo apt install python-vcstool
 mkdir -p <your_work_space>/src
 source /opt/ros/<distro>/setup.bash
 cd <your_work_space>
-wget https://raw.githubusercontent.com/IRSL-tut/irsl_ros_control_shm/refs/heads/release-candidate/test/install.vcs
+wget https://raw.githubusercontent.com/IRSL-tut/irsl_ros_control_shm/refs/heads/main/test/install.noetic.vcs
 (cd src; vcs import --recursive < ../install.vcs)
 catkin init
 catkin config --install
