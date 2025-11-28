@@ -3,12 +3,12 @@
 ## build
 
 ```
-sudo apt install python-vcstool
+sudo apt install python3-vcstool
 mkdir -p <your_work_space>/src
 source /opt/ros/<distro>/setup.bash
 cd <your_work_space>
 wget https://raw.githubusercontent.com/IRSL-tut/irsl_ros_control_shm/refs/heads/main/test/install.noetic.vcs
-(cd src; vcs import --recursive < ../install.vcs)
+(cd src; vcs import --recursive < ../install.noetic.vcs)
 catkin init
 catkin config --install
 catkin build irsl_dynamixel_hardware_shm irsl_ros_control_shm
