@@ -262,9 +262,10 @@ private:
         uint8_t handler_index,
         const std::vector<int32_t> &value_vector);
 
-private:
+public:
     // Dynamixel SDK
     std::unique_ptr<DynamixelWorkbench> dxl_wb_;
+private:
 
     // Device configuration
     std::vector<DynamixelInfo> dx_info;

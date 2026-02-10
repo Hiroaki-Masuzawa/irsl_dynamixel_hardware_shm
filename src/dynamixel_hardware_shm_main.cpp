@@ -62,7 +62,7 @@ int main(int argc, char **argv)
     ///
     rt.start();
     while (_running_) {
-        ds.writeDx();
+        //ds.writeDx();
         ds.readDx();
 
         cntr++;

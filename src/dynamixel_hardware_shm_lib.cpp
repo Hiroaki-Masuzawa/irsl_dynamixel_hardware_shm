@@ -101,6 +101,38 @@ void DynamixelShm::readDx () {
     impl->di->convertDyn2FltPosition(dyn_pos_cur, flt_pos_cur);
     impl->di->convertDyn2FltVelocity(dyn_vel_cur, flt_vel_cur);
     impl->di->convertDyn2FltTorque  (dyn_eff_cur, flt_eff_cur);
+    std::cerr <<"DEBUG " << (int16_t)dyn_eff_cur[0]  << " " 
+<< (int16_t)dyn_eff_cur[1] << " " 
+<< (int16_t)dyn_eff_cur[2] << " " 
+<< (int16_t)dyn_eff_cur[3] << " " 
+<< std::endl;
+    for(int i=0;i<3;i++){
+	    const int ids[4] = {36, 35, 33,34};
+    if (std::abs((int16_t)dyn_eff_cur[i] ) > 100){
+	    const char *log;
+	    bool result = impl->di->dxl_wb_->itemWrite(ids[i], "Position_P_Gain", 0, &log);
+	    if(result==false){
+		    std::cerr << log << std::endl;
+	    }
+	    bool result2 = impl->di->dxl_wb_->itemWrite(ids[i], "Position_D_Gain", 0, &log);
+	    if(result2==false){
+		    std::cerr << log << std::endl;
+	    }
+
+    }else{
+	    const char *log;
+	    bool result = impl->di->dxl_wb_->itemWrite(ids[i], "Position_P_Gain", 640, &log);
+	    if(result==false){
+		    std::cerr << log << std::endl;
+	    }
+	    bool result2 = impl->di->dxl_wb_->itemWrite(ids[i], "Position_D_Gain", 4000, &log);
+	    if(result2==false){
+		    std::cerr << log << std::endl;
+	    }
+    }
+    }
+    impl->di->writePosition(dyn_pos_cur);
+
 
     // write to sheread memory
     sm->writePositionCurrent(flt_pos_cur);
